@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { useWallet } from "@/hooks/useWallet";
 
 export default function Home() {
-  const { address } = useWallet();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-indigo-950">
@@ -42,21 +40,28 @@ export default function Home() {
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                {address ? (
-                  <Link
-                    href="/dashboard"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-600/25"
-                  >
-                    Go to Dashboard
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                <Link
+                  href="/student"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-blue-600/25"
+                >
+                  <span className="flex items-center justify-center w-7 h-7 bg-white/15 rounded-lg group-hover:scale-110 transition-transform">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
                     </svg>
-                  </Link>
-                ) : (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-6 py-3.5">
-                    Connect your wallet from the top-right to get started
-                  </p>
-                )}
+                  </span>
+                  Student Portal
+                </Link>
+                <Link
+                  href="/admin"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 hover:border-violet-300 dark:hover:border-violet-600 font-semibold py-3.5 px-8 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gray-900/5"
+                >
+                  <span className="flex items-center justify-center w-7 h-7 bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300 rounded-lg group-hover:scale-110 transition-transform">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                    </svg>
+                  </span>
+                  Teacher / Admin Portal
+                </Link>
               </div>
             </div>
           </div>

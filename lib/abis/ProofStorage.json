@@ -7,31 +7,493 @@
     },
     {
       "type": "function",
-      "name": "owner",
+      "name": "MAX_SESSION_DURATION",
       "inputs": [],
-      "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
       "stateMutability": "view"
     },
     {
       "type": "function",
+      "name": "authorizeMarker",
+      "inputs": [
+        {
+          "name": "marker",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "closeSession",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "courseCount",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "courses",
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "code",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "exists",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "createCourse",
+      "inputs": [
+        {
+          "name": "code",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "getCourse",
+      "inputs": [
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "code",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getSession",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "duration",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "closed",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "exists",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hasMarked",
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hasStudentMarked",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "student",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "isSessionActive",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "isStudentRegistered",
+      "inputs": [
+        {
+          "name": "student",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "markAttendance",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "markers",
-      "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
-      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "openSession",
+      "inputs": [
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "duration",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "proofs",
-      "inputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
-      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "registerStudent",
+      "inputs": [
+        {
+          "name": "student",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "registeredStudents",
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "revokeMarker",
+      "inputs": [
+        {
+          "name": "marker",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "sessionCount",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "sessions",
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "duration",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "closed",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "exists",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "storeProof",
       "inputs": [
-        { "name": "hash", "type": "bytes32", "internalType": "bytes32" },
-        { "name": "student", "type": "address", "internalType": "address" }
+        {
+          "name": "hash",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "student",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "unregisterStudent",
+      "inputs": [
+        {
+          "name": "student",
+          "type": "address",
+          "internalType": "address"
+        }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -39,59 +501,215 @@
     {
       "type": "function",
       "name": "verifyProof",
-      "inputs": [{ "name": "hash", "type": "bytes32", "internalType": "bytes32" }],
-      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+      "inputs": [
+        {
+          "name": "hash",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
       "stateMutability": "view"
     },
     {
-      "type": "function",
-      "name": "authorizeMarker",
-      "inputs": [{ "name": "marker", "type": "address", "internalType": "address" }],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "revokeMarker",
-      "inputs": [{ "name": "marker", "type": "address", "internalType": "address" }],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "transferOwnership",
-      "inputs": [{ "name": "newOwner", "type": "address", "internalType": "address" }],
-      "outputs": [],
-      "stateMutability": "nonpayable"
+      "type": "event",
+      "name": "AttendanceMarked",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "student",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
     },
     {
       "type": "event",
-      "name": "ProofStored",
+      "name": "CourseCreated",
       "inputs": [
-        { "name": "hash", "type": "bytes32", "indexed": true, "internalType": "bytes32" },
-        { "name": "student", "type": "address", "indexed": true, "internalType": "address" },
-        { "name": "timestamp", "type": "uint256", "indexed": false, "internalType": "uint256" }
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "indexed": false,
+          "internalType": "string"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "indexed": false,
+          "internalType": "string"
+        }
       ],
       "anonymous": false
     },
     {
       "type": "event",
       "name": "MarkerAuthorized",
-      "inputs": [{ "name": "marker", "type": "address", "indexed": true, "internalType": "address" }],
+      "inputs": [
+        {
+          "name": "marker",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
       "anonymous": false
     },
     {
       "type": "event",
       "name": "MarkerRevoked",
-      "inputs": [{ "name": "marker", "type": "address", "indexed": true, "internalType": "address" }],
+      "inputs": [
+        {
+          "name": "marker",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
       "anonymous": false
     },
     {
       "type": "event",
       "name": "OwnershipTransferred",
       "inputs": [
-        { "name": "previousOwner", "type": "address", "indexed": true, "internalType": "address" },
-        { "name": "newOwner", "type": "address", "indexed": true, "internalType": "address" }
+        {
+          "name": "previousOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "newOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "ProofStored",
+      "inputs": [
+        {
+          "name": "hash",
+          "type": "bytes32",
+          "indexed": true,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "student",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "SessionClosed",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "SessionOpened",
+      "inputs": [
+        {
+          "name": "sessionId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "courseId",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        },
+        {
+          "name": "duration",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "StudentRegistered",
+      "inputs": [
+        {
+          "name": "student",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "StudentUnregistered",
+      "inputs": [
+        {
+          "name": "student",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
       ],
       "anonymous": false
     }

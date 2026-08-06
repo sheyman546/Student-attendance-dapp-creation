@@ -15,52 +15,59 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
+  id           String       @id @default(uuid())
+  name         String?
+  email        String?      @unique
+  wallet       String?      @unique // one profile per wallet — linked when attendance is marked
+  matricNo     String?      @unique // student ID / matriculation number assigned by the institution
+  role         Role         @default(USER) // USER | TEACHER | ADMIN
+  isRegistered Boolean      @default(false) // mirrors on-chain registration
+  createdAt    DateTime     @default(now())
+  attendance   Attendance[]
+}
+
+model Course {
+  id        String    @id @default(uuid())
+  code      String    @unique // e.g. CS101
   name      String
-  email     String     @unique
-  wallet    String?
-  role      Role       @default(USER)
-  createdAt DateTime   @default(now())
-  reviews   Review[]
-  payments  Payment[]
-  attendance Attendance[]
+  onChainId Int?      @unique // course id in the ProofStorage contract
+  createdAt DateTime  @default(now())
+  sessions  Session[]
 }
 
-model Payment {
-  id        String   @id @default(uuid())
-  userId    String
-  amount    Float
-  reference String
-  hashProof String?
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-}
-
-model Review {
-  id        String   @id @default(uuid())
-  content   String
-  rating    Int
-  hashProof String?
-  userId    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+model Session {
+  id              String       @id @default(uuid())
+  courseId        String
+  course          Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  onChainId       Int?         @unique // session id in the ProofStorage contract
+  startTime       DateTime
+  durationSeconds Int
+  closed          Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+  closedAt        DateTime?
+  attendance      Attendance[]
 }
 
 model Attendance {
   id        String   @id @default(uuid())
   userId    String?
   wallet    String
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  courseId  String // denormalized so per-course breakdowns are cheap
+  txHash    String? // the student's on-chain markAttendance transaction hash
   date      DateTime
-  dateKey   String // UTC day (YYYY-MM-DD) — the uniqueness key for one-per-day
+  dateKey   String // UTC day (YYYY-MM-DD)
   hashProof String?
   user      User?    @relation(fields: [userId], references: [id])
 
-  // One attendance record per wallet per UTC day. The DB enforces this
-  // atomically, so two concurrent requests can't both insert.
-  @@unique([wallet, dateKey])
+  // One attendance record per student per session — mirrors the contract's
+  // no-double-marking guarantee at the database level too.
+  @@unique([wallet, sessionId])
 }
 
 enum Role {
   ADMIN
+  TEACHER
   USER
 }

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useWallet } from "@/hooks/useWallet";
-import { useAdmin } from "@/hooks/useAdmin";
+import { useTeacherStatus } from "@/hooks/useTeacherStatus";
 
 export default function Navbar() {
   const { address, connect, disconnect, isConnecting, error } = useWallet();
-  const { isAdmin } = useAdmin();
+  const { canAccess } = useTeacherStatus();
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
@@ -25,20 +25,16 @@ export default function Navbar() {
 
           <div className="hidden sm:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
-            {address && (
-              <Link href="/dashboard" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Dashboard</Link>
-            )}
-            {address && isAdmin && (
-              <Link href="/admin" className="text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors">Admin</Link>
-            )}
+            <Link href="/student" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Student Portal</Link>
+            <Link href="/admin" className="text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors">Teacher / Admin</Link>
           </div>
 
           <div className="flex items-center gap-3">
             {address ? (
               <div className="flex items-center gap-3">
-                <Link href="/dashboard" className="sm:hidden text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Dashboard</Link>
-                {isAdmin && (
-                  <Link href="/admin" className="sm:hidden text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors">Admin</Link>
+                <Link href="/student" className="sm:hidden text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Student</Link>
+                {canAccess && (
+                  <Link href="/admin" className="sm:hidden text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors">Teacher</Link>
                 )}
                 <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl px-3 py-1.5 border border-gray-200 dark:border-gray-700">
                   <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
